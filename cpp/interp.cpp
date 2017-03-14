@@ -415,7 +415,7 @@ interp<T>::interp(T xinp[], T yinp[], T zinp[], T winp[], T xvalinp[], T yvalinp
     xval.resize(P);
     yval.resize(Q);
     zval.resize(R);
-    w.resize(N);
+    w.resize(K);
     f.resize(P);
     for(unsigned int n=0; n<N; n++){
         x[n] = xinp[n];
@@ -484,7 +484,7 @@ interp<T>::interp(T xinp[], T yinp[], T zinp[], T winp[], T xvalinp[], T yvalinp
     xval.resize(P);
     yval.resize(Q);
     zval.resize(R);
-    w.resize(N);
+    w.resize(K);
     f.resize(P);
     for(unsigned int n=0; n<N; n++){
         x[n] = xinp[n];
@@ -495,12 +495,15 @@ interp<T>::interp(T xinp[], T yinp[], T zinp[], T winp[], T xvalinp[], T yvalinp
     for(unsigned int l=0; l<L; l++){
         z[l] = zinp[l];
     }
-    for(unsigned int n=0; n<N; n++){
-        w[n].resize(M);
-        for(unsigned int m=0; m<M; m++){
-            w[n][m].resize(L);
-            for(unsigned int l=0; l<L; l++){
-                w[n][m][l] = winp[l+m*L+n*M*L]; 
+    for(unsigned int k=0; k<K; k++){
+        w[k].resize(N);
+        for(unsigned int n=0; n<N; n++){
+            w[n].resize(M);
+            for(unsigned int m=0; m<M; m++){
+                w[n][m].resize(L);
+                for(unsigned int l=0; l<L; l++){
+                    w[n][m][l] = winp[l+m*L+n*M*L]; 
+                }
             }
         }
     }
@@ -540,7 +543,7 @@ interp<T>::interp(vector<T> xinp, vector<T> yinp, vector<T> zinp, vector<vector<
     xval.resize(P);
     yval.resize(Q);
     zval.resize(R);
-    w.resize(N);
+    w.resize(K);
     f.resize(P);
     for(unsigned int n=0; n<N; n++){
         x[n] = xinp[n];
@@ -551,12 +554,15 @@ interp<T>::interp(vector<T> xinp, vector<T> yinp, vector<T> zinp, vector<vector<
     for(unsigned int l=0; l<L; l++){
         z[l] = zinp[l];
     }
-    for(unsigned int n=0; n<N; n++){
-        w[n].resize(M);
-        for(unsigned int m=0; m<M; m++){
-            w[n][m].resize(L);
-            for(unsigned int l=0; l<L; l++){
-                w[n][m][l] = winp[n][m][l]; 
+    for(unsigned int k=0; k<K; k++){
+        w[k].resize(N);
+        for(unsigned int n=0; n<N; n++){
+            w[n].resize(M);
+            for(unsigned int m=0; m<M; m++){
+                w[n][m].resize(L);
+                for(unsigned int l=0; l<L; l++){
+                    w[n][m][l] = winp[l+m*L+n*M*L]; 
+                }
             }
         }
     }
@@ -597,7 +603,7 @@ interp<T>::interp(vector<T> xinp, vector<T> yinp, vector<T> zinp, vector<vector<
     xval.resize(P);
     yval.resize(Q);
     zval.resize(R);
-    w.resize(N);
+    w.resize(K);
     f.resize(P);
     for(unsigned int n=0; n<N; n++){
         x[n] = xinp[n];
@@ -608,12 +614,15 @@ interp<T>::interp(vector<T> xinp, vector<T> yinp, vector<T> zinp, vector<vector<
     for(unsigned int l=0; l<L; l++){
         z[l] = zinp[l];
     }
-    for(unsigned int n=0; n<N; n++){
-        w[n].resize(M);
-        for(unsigned int m=0; m<M; m++){
-            w[n][m].resize(L);
-            for(unsigned int l=0; l<L; l++){
-                w[n][m][l] = winp[n][m][l]; 
+    for(unsigned int k=0; k<K; k++){
+        w[k].resize(N);
+        for(unsigned int n=0; n<N; n++){
+            w[n].resize(M);
+            for(unsigned int m=0; m<M; m++){
+                w[n][m].resize(L);
+                for(unsigned int l=0; l<L; l++){
+                    w[n][m][l] = winp[l+m*L+n*M*L]; 
+                }
             }
         }
     }
