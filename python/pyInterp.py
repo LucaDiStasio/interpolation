@@ -168,46 +168,6 @@ def interpLagrange3D(x,y,z,w,xval,yval,zval):
                 f[q][r][p] = fprq
     return f
 
-def interpHermite1D():
-    #  Input: N x 1 vector x of interpolation nodes
-    #         N x 1 vector y of function values at interpolation nodes
-    #         N x 1 vector dy of first derivative values at interpolation nodes
-    #         M x 1 vector z of nodes for function evaluation
-    #
-    #  Output: M x 1 vector f of function evaluations
-    return f
-
-def interpHermite2D():
-    #  Input: N x 1 vector x of interpolation nodes
-    #         M x 1 vector y of interpolation nodes
-    #         N x M vector z of function values at interpolation nodes
-    #         N x M vector dzdx of partial derivative at interpolation nodes
-    #         N x M vector dzdy of partial derivative at interpolation nodes
-    #         N x M vector d2zdxdy of partial derivative at interpolation nodes
-    #         P x 1 vector xval of nodes for function evaluation
-    #         R x 1 vector yval of nodes for function evaluation
-    #  Output: P x R vector f of function evaluations
-    return f
-
-def interpHermite3D():
-    #  Input: N x 1 vector x of interpolation nodes
-    #         M x 1 vector y of interpolation nodes
-    #         L x 1 vector z of interpolation nodes
-    #         L x M x N vector w of function values at interpolation nodes
-    #         L x M x N vector dwdx of partial derivatives at interpolation nodes
-    #         L x M x N vector dwdy of partial derivatives at interpolation nodes
-    #         L x M x N vector dwdz of partial derivatives at interpolation nodes
-    #         L x M x N vector d2wdxdy of partial derivatives at interpolation nodes
-    #         L x M x N vector d2wdydz of partial derivatives at interpolation nodes
-    #         L x M x N vector d2wdxdz of partial derivatives at interpolation nodes
-    #         L x M x N vector d3wdxdydz of partial derivatives at interpolation nodes
-    #         P x 1 vector xval of nodes for function evaluation
-    #         R x 1 vector yval of nodes for function evaluation
-    #         Q x 1 vector zval of nodes for function evaluation
-    # Output: Q x R x P vector f of function evaluations
-    return f
-
-
 def main(argv):
 
 
