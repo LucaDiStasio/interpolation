@@ -103,15 +103,19 @@ def interpLagrange1D(x,y,z):
     M = len(z)
     f = zeros(M,1)
 
-    for k=1:size(x,1)
-        omega = ones(size(z,1),1)
-        for j=1:k-1
-            omega = omega.*(z-x(j,1))
-        f = f + omega*d(k,k);
+    for k in range(0,N):
+        omega = ones(M,1)
+        for j in range(0,k):
+            for i in range(0,M):
+                omega[i] = omega[i]*(z[i]-x[j])
+        for i in range(0,M):
+            f[i] = f[i] + omega[i]*d[k][k];
     return f
 
-def interpLagrange2D():
+def interpLagrange2D(x,y,z,xval,yval):
 
+    return f
+    
 def interpLagrange3D():
 
 def interpHermite1D():
