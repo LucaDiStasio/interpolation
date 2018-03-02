@@ -29,18 +29,100 @@ DESCRIPTION
 Tested with Python 2.7 Anaconda 2.4.1 (64-bit) distribution
        in Windows 7.
 
-  
+
 '''
 
-from os.path import join
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
+
+def zeros(m,n):
+    res = []
+    if m>1 and n>1:
+        for i in range(0,m):
+            row = []
+            for j in range(0,n):
+                row.append(0.0)
+            res.append(row)
+    elif m>1:
+        for i in range(0,m):
+            res.append(0.0)
+    else:
+        for i in range(0,n):
+            res.append(0.0)
+    return res
+
+def ones(m,n):
+    res = []
+    if m>1 and n>1:
+        for i in range(0,m):
+            row = []
+            for j in range(0,n):
+                row.append(1.0)
+            res.append(row)
+    elif m>1:
+        for i in range(0,m):
+            res.append(1.0)
+    else:
+        for i in range(0,n):
+            res.append(1.0)
+    return res
+
+def dividedDiffNewton(x,y):
+    #  Input: N x 1 vector x of interpolation nodes
+    #         N x 1 vector y of values at interpolation nodes
+    #  Output: N x N lower-triangular matrix d of divided differences
+    my = len(y)
+    d = zeros(my,my);
+    for i in range(0,my):
+        d[i][0] = y[i]
+    for j in range(1,my):
+        for i in range(j,my):
+            d[i][j] = (d[i][j-1]-d[i-1][j-1])/(x[i]-x[i-j+1])
+    return d
+
+def interpolantLagrange(x,xval,index):
+    #  Input: N x 1 vector x of interpolation nodes
+    #         M x 1 vector xval of nodes for function evaluation
+    #         index "index" of current node
+    #  Output: M x 1 vector l of interpolant evaluations
+    N = len(x);
+    M = len(xval);
+    l = ones(M,1);
+    for i in range(0,N):
+        if i!=index:
+            for j in range(0,M):
+                l[j] = l[j]*(xval[j]-x[i])./(x[index]-x[i])
+    return l
+
+def interpLagrange1D(x,y,z):
+    # Input: N x 1 vector x of interpolation nodes
+    #        N x 1 vector y of values at interpolation nodes
+    #        M x 1 vector z of nodes for function evaluation
+    #  Output: M x 1 vector f of function evaluations
+    d = dividedDiffNewton(x,y)
+    N = len(x)
+    M = len(z)
+    f = zeros(M,1)
+
+    for k=1:size(x,1)
+        omega = ones(size(z,1),1)
+        for j=1:k-1
+            omega = omega.*(z-x(j,1))
+        f = f + omega*d(k,k);
+    return f
+
+def interpLagrange2D():
+
+def interpLagrange3D():
+
+def interpHermite1D():
+
+def interpHermite2D():
+
+def interpHermite3D():
+
 
 def main(argv):
-    
-    
-    
-    
+
+
 if __name__ == "__main__":
     main(sys.argv[1:])
