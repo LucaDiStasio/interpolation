@@ -102,7 +102,6 @@ def interpLagrange1D(x,y,z):
     N = len(x)
     M = len(z)
     f = zeros(M,1)
-
     for k in range(0,N):
         omega = ones(M,1)
         for j in range(0,k):
@@ -123,18 +122,14 @@ def interpLagrange2D(x,y,z,xval,yval):
     M = len(y)
     P = len(xval)
     R = len(yval)
-
-    f = zeros(P,R);
-
-    for r=1:R
-        for p=1:P
-            fpr = 0;
-            for i=1:N
-                for j=1:M
-                    fpr = fpr + z(i,j)*Lagrangeinterpolant(x,xval(p,1),i)*Lagrangeinterpolant(y,yval(r,1),j);
-                end
-            end
-            f(p,r) = fpr
+    f = zeros(P,R)
+    for r in range(0,R):
+        for p in range(0,P):
+            fpr = 0.0
+            for i in range(0,N):
+                for j in range(0,M):
+                    fpr = fpr + z[i][j]*interpolantLagrange(x,xval[p],i)[0]*interpolantLagrange(y,yval[r],j)[0]
+            f[p][r] = fpr
     return f
 
 def interpLagrange3D():
