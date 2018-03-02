@@ -109,13 +109,34 @@ def interpLagrange1D(x,y,z):
             for i in range(0,M):
                 omega[i] = omega[i]*(z[i]-x[j])
         for i in range(0,M):
-            f[i] = f[i] + omega[i]*d[k][k];
+            f[i] = f[i] + omega[i]*d[k][k]
     return f
 
 def interpLagrange2D(x,y,z,xval,yval):
+    #  Input: N x 1 vector x of interpolation nodes
+    #         M x 1 vector y of interpolation nodes
+    #         N x M vector z of values at interpolation nodes
+    #         P x 1 vector xval of nodes for function evaluation
+    #         R x 1 vector yval of nodes for function evaluation
+    #  Output: P x R vector f of function evaluations
+    N = len(x)
+    M = len(y)
+    P = len(xval)
+    R = len(yval)
 
+    f = zeros(P,R);
+
+    for r=1:R
+        for p=1:P
+            fpr = 0;
+            for i=1:N
+                for j=1:M
+                    fpr = fpr + z(i,j)*Lagrangeinterpolant(x,xval(p,1),i)*Lagrangeinterpolant(y,yval(r,1),j);
+                end
+            end
+            f(p,r) = fpr
     return f
-    
+
 def interpLagrange3D():
 
 def interpHermite1D():
