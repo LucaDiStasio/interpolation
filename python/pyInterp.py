@@ -3,7 +3,7 @@
 '''
 =====================================================================================
 
-Copyright (c) 2017 Université de Lorraine & Luleå tekniska universitet
+Copyright (c) 2017 - 2018 Université de Lorraine & Luleå tekniska universitet
 Author: Luca Di Stasio <luca.distasio@gmail.com>
                        <luca.distasio@ingpec.eu>
 
@@ -24,11 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 DESCRIPTION
 
-
-
-Tested with Python 2.7 Anaconda 2.4.1 (64-bit) distribution
-       in Windows 7.
-
+Tested with Python 2.7 Anaconda 2.4.1 (64-bit) distribution in Windows 7.
 
 '''
 
@@ -47,6 +43,17 @@ def zeros(m,n):
             res.append(0.0)
     else:
         for i in range(0,n):
+            res.append(0.0)
+    return res
+
+def zeroTensor(indexList):
+    res = []
+    if len(indexList)>1:
+        element = zeroTensor(indexList[1:])
+        for i in range(indexList[0]):
+            res.append(element)
+    else:
+        for i in range(indexList[0]):
             res.append(0.0)
     return res
 
@@ -90,7 +97,7 @@ def interpolantLagrange(x,xval,index):
     for i in range(0,N):
         if i!=index:
             for j in range(0,M):
-                l[j] = l[j]*(xval[j]-x[i])./(x[index]-x[i])
+                l[j] = l[j]*(xval[j]-x[i])/(x[index]-x[i])
     return l
 
 def interpLagrange1D(x,y,z):
@@ -132,16 +139,44 @@ def interpLagrange2D(x,y,z,xval,yval):
             f[p][r] = fpr
     return f
 
-def interpLagrange3D():
+def interpLagrange3D(x,y,z,w,xval,yval,zval):
+    #  Input: N x 1 vector x of interpolation nodes
+    #         M x 1 vector y of interpolation nodes
+    #         L x 1 vector z of interpolation nodes
+    #         L x M x N vector w of values at interpolation nodes
+    #         P x 1 vector xval of nodes for function evaluation
+    #         R x 1 vector yval of nodes for function evaluation
+    #         Q x 1 vector zval of nodes for function evaluation
+    #  Output: Q x R x P vector f of function evaluations
+    N = len(x)
+    M = len(y)
+    L = len(z)
+    P = len(xval)
+    R = len(yval)
+    Q = len(zval)
+
+    f = zeros(Q,R,P)
+'''
+    for q=1:Q
+        for r=1:R
+            for p=1:P
+                fprq = 0
+                for k=1:L
+                    for j=1:M
+                        for i=1:N
+                            fprq = fprq + w(k,j,i)*Lagrangeinterpolant(x,xval(p,1),i)*Lagrangeinterpolant(y,yval(r,1),j)*Lagrangeinterpolant(z,zval(q,1),k)
+                f(q,r,p) = fprq
+    return f
 
 def interpHermite1D():
 
 def interpHermite2D():
 
 def interpHermite3D():
-
+'''
 
 def main(argv):
+
 
 
 if __name__ == "__main__":
